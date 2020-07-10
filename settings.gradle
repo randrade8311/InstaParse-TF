@@ -1,0 +1,2 @@
+rootProject.name='InstaParse-TF'
+include ':app'
