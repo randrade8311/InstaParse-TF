@@ -4,40 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    tools:context=".LoginActivity">
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    tools:context=".LoginActivity"
+    android:background="@drawable/gradient">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        app:srcCompat="@drawable/insta_with_icon"
+        tools:srcCompat="@drawable/insta_with_icon" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etUsername"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:ems="10"
-        android:hint="username"/>
+        android:hint="username"
+        android:backgroundTint="@color/white"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="20dp"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etPassword"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:ems="10"
         android:hint="password"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:backgroundTint="@color/white"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="20dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnLogin"
         android:text="Login"
-        android:layout_weight="1"/>
+        android:layout_weight="0"
+        android:background="#0084FF"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSignup"
         android:text="Sign Up"
-        android:layout_weight="1"/>
+        android:layout_weight="0"
+        android:background="#0084FF"
+        android:textSize="20dp"/>
 
 </LinearLayout>

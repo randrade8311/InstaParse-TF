@@ -3,38 +3,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_margin="16dp"
+    android:layout_margin="1dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#000">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NEW POST"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        />
 
     <EditText
         android:ems="10"
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description. . . " />
+        android:hint="Description. . . "
+        android:backgroundTint="@color/white"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        />
 
     <Button
         android:id="@+id/btnCaptureImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Take Picture" />
+        android:text="Take Picture"
+        android:background="#0084FF"
+        android:textColor="@color/white"
+        android:textSize="20dp"/>
 
     <ImageView
         android:id="@+id/ivPostImage"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_height="250dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:padding="10dp"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSubmit"
-        android:text="Submit" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/logout"
-        android:text="Log out"/>
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:background="#0084FF"
+        android:textSize="20dp"/>
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log out"
+            android:textColor="@color/white"
+            android:background="#0084FF"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private Button logout;
     private File photoFile;
     private String photoFileName = "photo.jpg";
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         if(ParseUser.getCurrentUser() == null){
             goLoginActivity();
         }
+        pd = new ProgressDialog(this);
 
         btnCaptureImage=findViewById(R.id.btnCaptureImage);
         ivPostImage =findViewById(R.id.ivPostImage);
@@ -57,8 +60,12 @@ public class MainActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new ProgressDialog(MainActivity.this);
+                pd.setMessage("Loggin out...");
+                pd.show();
                 Toast.makeText(MainActivity.this, "Loggin out!", Toast.LENGTH_LONG).show();
                 ParseUser.logOut();
+                pd.dismiss();
                 goLoginActivity();
             }
         });
@@ -67,11 +74,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()){
-                    Toast.makeText(MainActivity.this,"Description cannot be empty", Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this,"Description cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(photoFile == null ||ivPostImage.getDrawable() == null){
-                    Toast.makeText(MainActivity.this,"There is no Image!", Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this,"There is no Image!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
@@ -140,6 +147,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void savePost(String description, ParseUser currentUser, File photoFile) {
+        new ProgressDialog(MainActivity.this);
+        pd.setMessage("Adding post...");
+        pd.show();
+
         Post post= new Post();
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
@@ -150,10 +161,12 @@ public class MainActivity extends AppCompatActivity {
                 if(e!=null){
                     Log.e(TAG,"Eror while saving", e);
                     Toast.makeText(MainActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 }
                 Log.i(TAG, "Post save was successful!!");
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
+                pd.dismiss();
             }
         });
     }
