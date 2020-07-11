@@ -69,11 +69,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (e == null) {
                     // Hooray! Let them use the app now.
                     goMainActivity();
-                    Toast.makeText(LoginActivity.this,"Success!", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this,"Account made!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Sign up didn't succeed. Look at the ParseException
                     // to figure out what went wrong
                     Log.e(TAG, "issue with login", e);
+                    Toast.makeText(LoginActivity.this,"Account couldn't be made!", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -86,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, com.parse.ParseException e) {
                 if(e != null){
+                    Toast.makeText(LoginActivity.this,"Error with log in!", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "issue with login", e);
                     return;
                 }
