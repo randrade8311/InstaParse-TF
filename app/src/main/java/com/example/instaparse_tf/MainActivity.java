@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.instaparse_tf.fragments.ComposeFragment;
+import com.example.instaparse_tf.fragments.PostsFragment;
+import com.example.instaparse_tf.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -36,6 +39,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Main Activity";
+    final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
     private Button logout;
 
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if(ParseUser.getCurrentUser() == null){
+            ParseUser.logOut();
             goLoginActivity();
         }
 
@@ -68,24 +73,32 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
-                        Toast.makeText(MainActivity.this, "home!", Toast.LENGTH_SHORT).show();
-                        //fragment= new PostsFragment();
+//                        Toast.makeText(MainActivity.this, "home!", Toast.LENGTH_SHORT).show();
+                        fragment= new PostsFragment();
                         break;
                     case R.id.action_compose:
-                        Toast.makeText(MainActivity.this, "compose!", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "compose!", Toast.LENGTH_SHORT).show();
                         fragment= new ComposeFragment();
+                        break;
+                    case R.id.action_logout:
+//                        Toast.makeText(MainActivity.this, "compose!", Toast.LENGTH_SHORT).show();
+                        ParseUser.logOut();
+                        goLoginActivity();
+                        fragment = new PostsFragment();
                         break;
                     case R.id.action_profile:
                     default:
-                        Toast.makeText(MainActivity.this, "profile!", Toast.LENGTH_SHORT).show();
-                        //fragment= new ProfileFragment();
+//                        Toast.makeText(MainActivity.this, "profile!", Toast.LENGTH_SHORT).show();
+                        fragment= new ProfileFragment();
                         break;
                 }
-                // fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
                 return true;
             }
         });
         // queryPost();
+        // set default selection
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
 
     private void goLoginActivity() {

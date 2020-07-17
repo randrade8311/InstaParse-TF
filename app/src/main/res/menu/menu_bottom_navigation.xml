@@ -17,4 +17,9 @@
         android:icon="@drawable/instagram_user_filled_24_white"
         android:title="Profile"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/sign_out_icon_17"
+        android:title="LogOut"
+        app:showAsAction="always" />
 </menu>
