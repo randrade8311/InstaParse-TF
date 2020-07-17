@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#000">
+    android:background="#000000">
 
     <TextView
         android:layout_width="match_parent"
@@ -55,21 +55,14 @@
         android:background="#0084FF"
         android:textSize="20dp"/>
 
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log out"
-            android:textColor="@color/white"
-            android:background="#0084FF"
-            android:textSize="20dp"
-            android:layout_alignParentBottom="true"
-            />
-    </RelativeLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/menu_bottom_navigation"
+        />
 
 </LinearLayout>

@@ -1,8 +1,10 @@
 package com.example.instaparse_tf;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,12 +15,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private BottomNavigationView bottomNavigationView;
     private Button logout;
     private File photoFile;
     private String photoFileName = "photo.jpg";
@@ -56,19 +61,20 @@ public class MainActivity extends AppCompatActivity {
         ivPostImage =findViewById(R.id.ivPostImage);
         btnSubmit =findViewById(R.id.btnSubmit);
         etDescription = findViewById(R.id.etDescription);
-        logout = findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new ProgressDialog(MainActivity.this);
-                pd.setMessage("Loggin out...");
-                pd.show();
-                Toast.makeText(MainActivity.this, "Loggin out!", Toast.LENGTH_LONG).show();
-                ParseUser.logOut();
-                pd.dismiss();
-                goLoginActivity();
-            }
-        });
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        // logout = findViewById(R.id.logout);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new ProgressDialog(MainActivity.this);
+//                pd.setMessage("Loggin out...");
+//                pd.show();
+//                Toast.makeText(MainActivity.this, "Loggin out!", Toast.LENGTH_LONG).show();
+//                ParseUser.logOut();
+//                pd.dismiss();
+//                goLoginActivity();
+//            }
+//        });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +98,29 @@ public class MainActivity extends AppCompatActivity {
                 launchCamera();
             }
         });
-        
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment;
+                switch (menuItem.getItemId()) {
+                    case R.id.action_home:
+                        Toast.makeText(MainActivity.this, "home!", Toast.LENGTH_SHORT).show();
+                        //fragment= new PostsFragment();
+                        break;
+                    case R.id.action_compose:
+                        Toast.makeText(MainActivity.this, "compose!", Toast.LENGTH_SHORT).show();
+                        //fragment= new ComposeFragment();
+                        break;
+                    case R.id.action_profile:
+                    default:
+                        Toast.makeText(MainActivity.this, "profile!", Toast.LENGTH_SHORT).show();
+                        //fragment= new ProfileFragment();
+                        break;
+                }
+                //fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                return true;
+            }
+        });
         // queryPost();
     }
 
